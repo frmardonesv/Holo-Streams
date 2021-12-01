@@ -3,6 +3,8 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Footer from "../components/Footer/Footer";
 import Home from "../pages/Home";
 import { Live } from "../pages/Live";
+import Pago from "../pages/Pago";
+import PagoAceptado from "../pages/PagoAceptado";
 import Talents from "../pages/Talents";
 import Vtuber from "../pages/Vtuber";
 
@@ -18,6 +20,12 @@ const RouterApp = () => {
         </Route>
         <Route path="/lives">
           <Live />
+        </Route>
+        <Route path="/pago">
+          <Pago />
+        </Route>
+        <Route exact path="/status">
+          <PagoAceptado />
         </Route>
         <Route exact path="/">
           <Home />

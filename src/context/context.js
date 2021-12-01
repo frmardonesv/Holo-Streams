@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useReducer, useRef } from "react";
+import React, { useContext, useEffect, useReducer } from "react";
 import {
   GET_DATA_LOADING,
   GET_DATA_SUCCESS,
@@ -35,7 +35,6 @@ const AppContext = React.createContext();
 
 const AppProvider = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, initialState);
-  const mounted = useRef(false);
   let API = "https://hololivfans-project-api.herokuapp.com/api/vtubers/";
   let APISTREAM =
     "https://api.holotools.app/v1/live?max_upcoming_hours=24&lookback_hours=8";
@@ -73,15 +72,15 @@ const AppProvider = ({ children }) => {
     }
   };
 
-  const updateStreams = async () => {
-    try {
-      const res = await axios.get(APISTREAM);
-      const updateData = res.data;
-      dispatch({ type: UPDATE_DATA_STREAM, payload: updateData });
-    } catch (error) {
-      dispatch({ type: GET_DATA_ERROR });
-    }
-  };
+  // const updateStreams = async () => {
+  //   try {
+  //     const res = await axios.get(APISTREAM);
+  //     const updateData = res.data;
+  //     dispatch({ type: UPDATE_DATA_STREAM, payload: updateData });
+  //   } catch (error) {
+  //     dispatch({ type: GET_DATA_ERROR });
+  //   }
+  // };
 
   const updateCategory = (e) => {
     let value;
@@ -107,26 +106,19 @@ const AppProvider = ({ children }) => {
   }, []);
 
   useEffect(() => {
-    if (!mounted.current) {
-      return;
-    }
     dispatch({ type: FILTER_DATA });
   }, [state.filtros.categoryVtuber, state.filtros.text]);
 
   useEffect(() => {
-    if (!mounted.current) {
-      mounted.current = true;
-      return;
-    }
     dispatch({ type: FILTER_DATA_STREAM });
   }, [state.filtros.categoryStream]);
 
-  useEffect(() => {
-    let interval = setInterval(updateStreams, 60000);
-    return () => {
-      clearInterval(interval);
-    };
-  });
+  // useEffect(() => {
+  //   let interval = setInterval(updateStreams, 60000);
+  //   return () => {
+  //     clearInterval(interval);
+  //   };
+  // });
 
   return (
     <AppContext.Provider

@@ -19,6 +19,7 @@ const Filter = ({ talents }) => {
 
   if (talents) {
     const categoriesVtuber = sortData(data, "vtuber");
+    console.log(categoriesVtuber);
     return (
       <ContainerFiltro className="talents">
         <ul>
@@ -40,6 +41,7 @@ const Filter = ({ talents }) => {
       </ContainerFiltro>
     );
   }
+
   const categoriesStream = sortData(dataStream, "stream");
   return (
     <ContainerFiltro width="450px" className="streams">

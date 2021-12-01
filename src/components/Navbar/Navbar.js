@@ -25,7 +25,7 @@ const Nabvar = () => {
             setNavBar("Home");
           }}
         >
-          <h2>HoloUwU</h2>
+          <h2>Holo Fans</h2>
         </Link>
         <div>
           {!open ? (
